@@ -1,0 +1,42 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+  padding: 1rem;
+
+  section {
+    overflow-x: auto;
+    grid-column: span 12;
+
+    /* Mobile default */
+    display: block;
+
+    @media (min-width: 768px) {
+      /* 10 columns, centered */
+      grid-column: 2 / span 10;
+
+      /* Row height */
+      min-height: 400px; /* <-- x px */
+
+      /* Vertical centering */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+  }
+}

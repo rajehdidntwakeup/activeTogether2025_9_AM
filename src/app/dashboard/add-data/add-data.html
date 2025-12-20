@@ -1,13 +1,83 @@
-<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-  <h2>Zum Kurs anmelden!</h2>
-  <input placeholder="Name" type="input" formControlName="name" /><br />
-  <input placeholder="Geburtsdatum" type="date" formControlName="birthdate" /><br />
-  <select formControlName="courseId">
-    <option value="" disabled>Bitte auswählen</option>
-    @for (course of store.courses; track $index) {
-    <option [ngValue]="course.id">{{ course.name }}</option>
-    }
-  </select>
+<mat-card class="registration-card">
+  <mat-card-header>
+    <mat-card-title>Zum Kurs anmelden!</mat-card-title>
+  </mat-card-header>
 
-  <button type="submit">Erfassen</button>
-</form>
+  <mat-card-content>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="registration-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder="Name">
+        @if (signupForm.get('name')?.invalid &&
+        (signupForm.get('name')?.dirty || signupForm.get('name')?.touched)) {
+
+          <mat-hint class="error-color">
+            @if (signupForm.get('name')?.hasError('required')) {
+              Name ist erforderlich
+            }
+            @if (signupForm.get('name')?.hasError('minlength') && signupForm.get('name')?.hasError('pattern')) {
+              Name muss mindestens 2 Zeichen lang sein, und darf keine Zahlen enthalten
+            } @else if (signupForm.get('name')?.hasError('minlength')) {
+              Name muss mindestens 2 Zeichen lang sein
+            }
+            @else if (signupForm.get('name')?.hasError('pattern')) {
+              Name darf keine Zahlen enthalten
+            } @else if (signupForm.get('name')?.hasError('maxlength')) {
+              Name darf maximal 50 Zeichen lang sein
+            }
+           </mat-hint>
+        }
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Geburtsdatum</mat-label>
+        <input matInput [matDatepicker]="birthdayDatepicker" formControlName="birthdate" placeholder="Geburtsdatum">
+        <mat-datepicker-toggle matSuffix [for]="birthdayDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #birthdayDatepicker></mat-datepicker>
+        @if (signupForm.get('birthdate').invalid && (signupForm.get('birthdate').dirty || signupForm.get('birthdate').touched)) {
+          <mat-error class="error-color">Geburtsdatum ist erforderlich</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Kursauswahl</mat-label>
+        <mat-select formControlName="courseId">
+          <mat-option value="" disabled>Bitte auswählen</mat-option>
+          @for (course of store.courses; track $index) {
+            <mat-option [value]="course.id">
+              {{ course.name }}
+            </mat-option>
+          }
+        </mat-select>
+        @if (signupForm.get('courseId').invalid && (signupForm.get('courseId').dirty || signupForm.get('courseId').touched)) {
+          <mat-error class="error-color">Kursauswahl ist erforderlich</mat-error>
+        }
+      </mat-form-field>
+
+      <div class="newsletter-section">
+        <mat-checkbox formControlName="newsletter">
+          Newsletter erhalten
+        </mat-checkbox>
+
+        @if (signupForm.get('newsletter')?.value) {
+          <mat-form-field appearance="outline">
+            <mat-label>E-Mail</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="E-Mail">
+            @if (signupForm.get('email').invalid && (signupForm.get('email').dirty || signupForm.get('email').touched)) {
+              @if (signupForm.get('email').hasError('email')) {
+                <mat-error class="error-color">Ungültige E-Mail-Adresse</mat-error>
+              }
+            }
+          </mat-form-field>
+        }
+      </div>
+
+      <div class="actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid">
+          Erfassen
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
