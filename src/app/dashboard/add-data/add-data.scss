@@ -1,7 +1,16 @@
 .registration-card {
   max-width: 800px;
-  margin: 2rem auto;
-  padding: 1rem;
+  margin: 3rem auto;
+  padding: 2rem;
+
+  mat-card-header {
+    justify-content: center;
+    padding-bottom: 2px;
+  }
+
+  mat-card-title {
+    text-align: center;
+  }
 }
 
 .registration-form {
