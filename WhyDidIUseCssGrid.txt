@@ -1,0 +1,6 @@
+Es gibt mehrere Grunde warum ich CSS Grid verwendet habe:
+- Die folgenden Punkte basieren größtenteils auf meiner Meinung :) -
+  - Es ist einfach zu verwenden.
+  - In kleinen Projekten kann es schnell sein.
+  - Es skaliert besser.
+  - Es ist auch Nativ in HTML.
