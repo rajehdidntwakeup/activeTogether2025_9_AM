@@ -1,7 +1,7 @@
 .registration-card {
   max-width: 800px;
   margin: 3rem auto;
-  padding: 2rem;
+  padding: 3rem;
 
   mat-card-header {
     justify-content: center;
@@ -51,4 +51,5 @@ mat-form-field {
 
 .error-color {
   color: #f44336;
+  font-size: 12px;
 }
