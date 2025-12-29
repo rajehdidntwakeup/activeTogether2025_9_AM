@@ -1,6 +1,6 @@
 Es gibt mehrere Grunde warum ich CSS Grid verwendet habe:
 - Die folgenden Punkte basieren größtenteils auf meiner Meinung :) -
   - Es ist einfach zu verwenden.
-  - In kleinen Projekten kann es schnell sein.
-  - Es skaliert besser.
-  - Es ist auch Nativ in HTML.
+  - 2D-Layout-Kontrolle: Im Gegensatz zu Bootstrap (Flexbox-basiert) steuert CSS Grid Spalten und Zeilen gleichzeitig. Das ermöglicht die präzise Umsetzung der geforderten fixen Zeilenhöhen.
+  - Hohe Flexibilität: Funktionen wie `repeat()` und die `fr`-Einheit erlauben eine wesentlich feinere Skalierbarkeit als ein starres Framework-Raster.
+  - Es ist auch Nativ in HTML: Kein Overhead durch externe Frameworks das heißt bessere Performance und geringere Bundle-Size.

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Store } from '../../shared/store';
+import {Backend} from '../../shared/backend';
 
 @Component({
   selector: 'app-data',
@@ -9,7 +10,12 @@ import { Store } from '../../shared/store';
   styleUrl: './data.scss',
 })
 export class Data {
+  public backend = inject(Backend);
   public store = inject(Store);
 
-  ngOnInit() {}
+  deleteRegistration(id: string) {
+    if (confirm('Sind Sie sicher?')) {
+      this.backend.deleteRegistration(id);
+    }
+  }
 }
